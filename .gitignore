@@ -8,3 +8,4 @@ el-get
 elpa
 recentf
 ac-comphist.dat
+*.elc
