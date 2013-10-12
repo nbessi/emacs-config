@@ -43,10 +43,8 @@
                :url "https://github.com/re5et/simp.git")
         (:name flycheck :type git
                :url "https://github.com/flycheck/flycheck.git")
-        ;;(:name pylint :type elpa)
         (:name wgrep :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
-;;	(:name jedi :type elpa)
         (:name powerline :type git
          :url "https://github.com/milkypostman/powerline.git")))
 
