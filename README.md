@@ -1,5 +1,5 @@
 emacs-config
 ============
 
-My emacs config.
-Feel free to use it.
+Here you will find my emacs configuration.
+Please feel free to use it.
