@@ -1,0 +1,10 @@
+# name: openerp_data
+# key: openerp_data
+# --
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+        $1
+  </data>
+</openerp>
+$0

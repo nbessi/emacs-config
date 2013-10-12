@@ -1,0 +1,7 @@
+# name: openerp_import
+# key: openerp_import
+# --
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from openerp.tools.translate import _
+from openerp.osv.osv import except_osv

@@ -1,0 +1,4 @@
+# name: openerp_import
+# key: openerp_import
+# --
+from openerp.osv import orm, fields

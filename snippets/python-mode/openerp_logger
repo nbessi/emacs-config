@@ -1,0 +1,5 @@
+# name: openerp_logger
+# key: openerp_logger
+# --
+import logging
+_logger = logging.getLogger(__name__)

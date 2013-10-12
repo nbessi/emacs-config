@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: openerp <field name="" ../>
+# key: openerp_field
+# --
+<field name="${1:name}" 
+       attrs="${2:attrs}"
+       readonly="${3:False}"
+       required="${4:False}"/>

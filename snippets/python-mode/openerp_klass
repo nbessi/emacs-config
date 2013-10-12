@@ -1,0 +1,11 @@
+# name: openerp_klass
+# key: openerp_klass
+# --
+
+
+class ${1:MyClass}(${2:orm.Model}):
+      """${3:docstring}"""
+
+      _name = "${1:$(replace-regexp-in-string "_" "." (downcase yas/text))}"
+      _columns = {}
+$0

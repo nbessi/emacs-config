@@ -1,0 +1,8 @@
+# name: def xxx(cr, uid, ids ...):
+# key: erpdef
+# --
+def ${1:name}(self, cursor, uid, ids, ${2:optional_args}, context=None):
+    context = context or {}
+    if isinstance(ids, (int, long)):
+       ids = [ids]
+    $0
