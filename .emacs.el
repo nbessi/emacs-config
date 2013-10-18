@@ -53,7 +53,7 @@
        '(smex ace-jump-mode yasnippet switch-window expand-region
               multiple-cursors yaml-mode yasnippet sr-speedbar
               highlight-indentation  auto-complete wgrep jedi
-              powerline feature-mode color-theme)
+              powerline feature-mode color-theme nrepl f)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
