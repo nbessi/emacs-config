@@ -41,9 +41,8 @@
 (setq el-get-sources
       '((:name simp :type git
                :url "https://github.com/re5et/simp.git")
-        ;; (:name flycheck :type git
-        ;;        :url "https://github.com/flycheck/flycheck.git"
-        ;;        :depends (s dash cl-lib f))
+        (:name cider :type git
+               :url "https://github.com/clojure-emacs/cider.git")
         (:name wgrep :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         (:name powerline :type git
@@ -54,7 +53,8 @@
        '(smex ace-jump-mode yasnippet switch-window expand-region
               multiple-cursors yaml-mode yasnippet sr-speedbar
               highlight-indentation  auto-complete wgrep jedi
-              powerline feature-mode color-theme nrepl f flycheck)
+              powerline feature-mode color-theme f flycheck
+              clojure-mode dash pkg-info)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
