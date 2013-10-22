@@ -3,7 +3,9 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        cua-delete-region
         cua-paste
+        cua-set-rectangle-mark
         python-indent-dedent-line-backspace
         yas-expand
         ))
