@@ -16,6 +16,8 @@
  '(diff-added ((t (:foreground "Green"))))
  '(diff-removed ((t (:foreground "Red")))))
 
+;;--------- disable menu -----------------------------------
+(menu-bar-mode -1)
 
 ;;--------- package---------------------------------
 (require 'package)
