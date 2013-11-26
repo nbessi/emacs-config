@@ -1,8 +1,36 @@
 # name: def xxx(cr, uid, ids ...):
-# key: erpdef
+# key: openerp_fun
 # --
-def ${1:name}(self, cursor, uid, ids, ${2:optional_args}, context=None):
-    context = context or {}
+def ${1:name}(cr, uid, ids, $2, context=None):
+    """$3
+    ${2:$
+      (let*
+        ((indent
+            (concat "\n" (make-string (current-column) 32)))
+           (args
+            (mapconcat
+             '(lambda (x)
+                (if (not (string= (nth 0 x) ""))
+                    (concat ":param "(nth 0 x)":")))
+             (mapcar
+              '(lambda (x)
+                 (mapcar
+                  '(lambda (x)
+                     (replace-regexp-in-string "[[:blank:]]*$" ""
+                      (replace-regexp-in-string "^[[:blank:]]*" "" x)))
+                  x))
+              (mapcar '(lambda (x) (split-string x "="))
+                      (split-string yas-text ",")))
+             indent)))
+      (if (string= args "")
+          (make-string 3 34)
+        (mapconcat
+         'identity
+         (list "" "Arguments:" args (make-string 3 34))
+         indent)))
+    }
+    if context is None:
+        context = {}
     if isinstance(ids, (int, long)):
        ids = [ids]
     $0

@@ -6,11 +6,18 @@
         cua-delete-region
         cua-paste
         cua-set-rectangle-mark
+        ido-find-file
+        nxml-electric-slash
+        orgtbl-hijacker-command-100
         python-indent-dedent-line-backspace
+        python-indent-electric-colon
         yas-expand
         ))
 
 (setq mc/cmds-to-run-once
       '(
         beginning-of-buffer
+        compile-goto-error
+        mark-whole-buffer
+        python-shell-send-buffer
         ))
