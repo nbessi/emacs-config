@@ -20,4 +20,5 @@
         compile-goto-error
         mark-whole-buffer
         python-shell-send-buffer
+        yaml-electric-backspace
         ))

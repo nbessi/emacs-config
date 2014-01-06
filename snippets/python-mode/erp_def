@@ -1,7 +1,7 @@
 # name: def xxx(cr, uid, ids ...):
 # key: openerp_fun
 # --
-def ${1:name}(cr, uid, ids, $2, context=None):
+def ${1:name}(self, cr, uid, ids, $2, context=None):
     """$3
     ${2:$
       (let*

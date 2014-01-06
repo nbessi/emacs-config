@@ -141,5 +141,15 @@
 ;;----- custom helpers ---------------------------
 (load "~/.emacs.d/helper/helper")
 
+;;------ set transparancy ------
+(defun set_frame_opacity(numb)
+  "Set level of transparenbcy for the current frame"
+  (interactive "nEnter transparency level in range 0-100: ")
+  (if (> numb 100)
+      (message "Error! The maximum value for transparency is 100!")
+    (if (< numb 0)
+        (message "Error! The minimum value for transparency is 0!")
+      (set-frame-parameter nil 'alpha numb))))
+
 ;;----server-mode---
 (server-start)
