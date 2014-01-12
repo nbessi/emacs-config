@@ -76,6 +76,7 @@
 (global-set-key (kbd "§") 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f6>") 'rgrep)
+(global-set-key (kbd "<f7>") 'ido-switch-buffer)
 (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; enable cua mode
 (cua-mode 1)
@@ -139,6 +140,16 @@
 (load "~/.emacs.d/init-builtin/ruby")
 ;;----- custom helpers ---------------------------
 (load "~/.emacs.d/helper/helper")
+
+;;------ set transparancy ------
+(defun set_frame_opacity(numb)
+  "Set level of transparenbcy for the current frame"
+  (interactive "nEnter transparency level in range 0-100: ")
+  (if (> numb 100)
+      (message "Error! The maximum value for transparency is 100!")
+    (if (< numb 0)
+        (message "Error! The minimum value for transparency is 0!")
+      (set-frame-parameter nil 'alpha numb))))
 
 ;;----server-mode---
 (server-start)
