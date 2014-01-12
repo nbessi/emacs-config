@@ -83,7 +83,7 @@
 
 ;;---- set font -----
  (set-face-attribute 'default nil
-                    :family "Menlo" :height 105 :weight 'normal)
+                    :family "Menlo for Powerline" :height 95 :weight 'normal)
 
 ;;--------------- line/columns numbers ----
 (line-number-mode 1)
