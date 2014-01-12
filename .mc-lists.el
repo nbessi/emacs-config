@@ -7,6 +7,7 @@
         cua-paste
         cua-set-rectangle-mark
         python-indent-dedent-line-backspace
+        yaml-electric-backspace
         yas-expand
         ))
 
