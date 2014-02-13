@@ -53,10 +53,10 @@
 (setq my-packages
       (append
        '(smex ace-jump-mode yasnippet switch-window expand-region
-              multiple-cursors yaml-mode yasnippet sr-speedbar
+              multiple-cursors yaml-mode yasnippet 
               highlight-indentation  auto-complete wgrep jedi
-              powerline feature-mode color-theme f flycheck
-              clojure-mode dash pkg-info)
+              powerline feature-mode color-theme f 
+              clojure-mode dash)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)

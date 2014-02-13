@@ -8,10 +8,11 @@
         cua-set-rectangle-mark
         ido-find-file
         nxml-electric-slash
+        org-force-self-insert
         orgtbl-hijacker-command-100
         python-indent-dedent-line-backspace
-        yaml-electric-backspace
         python-indent-electric-colon
+        yaml-electric-backspace
         yas-expand
         ))
 
