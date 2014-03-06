@@ -1,4 +1,4 @@
-(require 'simp) 
+(require 'simp)
 (simp-project-define
   '(:has (OpenERP.meta)
     :ignore (.bzr)))
@@ -7,26 +7,26 @@
 (defun erp_launch()
   (interactive)
   ;; we pass in comint mode
-  (defadvice compile 
+  (defadvice compile
     (before ad-compile-smart activate)
     (ad-set-arg 1 t))
   (ansi-color-for-comint-mode-on)
-  (message "Running: %s" (concat 
-			  (simp-project-root)
-			  "/OpenERP.meta/launch.sh"))
-  (compile 
-   (concat 
+  (message "Running: %s" (concat
+                          (simp-project-root)
+                          "/OpenERP.meta/launch.sh"))
+  (compile
+   (concat
     (simp-project-root) "/OpenERP.meta/launch.sh")))
-(global-set-key (kbd "s-b") 'erp_launch)
+(global-set-key (kbd "<f9>") 'erp_launch)
 ;;(global-set-key (kbd "A-b") 'erp_launch)
 
 ;;-------------- Show bzr status of all branches of OpenERP ------------
 (defun erp_sources_status()
   (interactive)
   (message "Checking source: %s" (concat (simp-project-root) "/parts"))
-  (compile (concat "cd " 
-		   (concat (simp-project-root) "/parts") 
-		   "&& for i in *; do echo ------$i------; bzr status  $i ;done")))
+  (compile (concat "cd "
+                   (concat (simp-project-root) "/parts")
+                   "&& for i in *; do echo ------$i------; bzr status  $i ;done")))
 
 
 ;;------------ Run commands in OpenERP.meta folder
