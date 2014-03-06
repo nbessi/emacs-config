@@ -16,10 +16,27 @@
  '(diff-added ((t (:foreground "Green"))))
  '(diff-removed ((t (:foreground "Red")))))
 
-;;--------- disable menu -----------------------------------
+;;----------- scratch comment --------------------
+(setq initial-scratch-message "Usefull emacs command I use less frequently:
+Register: http://www.gnu.org/software/emacs/manual/html_node/emacs/Registers.html#Registers
+Do not forget to use the extention list register.
+
+The mark ring that works like the kill ring:
+https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html
+
+The hide show minor mode:
+http://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html
+
+In short:
+The wgrep mode
+the flush-line command
+
+")
+
+;;--------- disable menu -------------------------
 (menu-bar-mode -1)
 
-;;--------- package---------------------------------
+;;--------- package-------------------------------
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -53,9 +70,9 @@
 (setq my-packages
       (append
        '(smex ace-jump-mode yasnippet switch-window expand-region
-              multiple-cursors yaml-mode yasnippet 
+              multiple-cursors yaml-mode yasnippet
               highlight-indentation  auto-complete wgrep jedi
-              powerline feature-mode color-theme f 
+              powerline feature-mode color-theme f
               clojure-mode dash)
        (mapcar 'el-get-source-name el-get-sources)))
 
@@ -150,6 +167,10 @@
     (if (< numb 0)
         (message "Error! The minimum value for transparency is 0!")
       (set-frame-parameter nil 'alpha numb))))
+
+;;---disable yas in term mode ---
+(add-hook 'term-mode-hook (lambda()
+                (yas-minor-mode -1)))
 
 ;;----server-mode---
 (server-start)
