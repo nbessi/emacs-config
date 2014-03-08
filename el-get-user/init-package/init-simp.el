@@ -7,18 +7,33 @@
 (defun erp_launch()
   (interactive)
   ;; we pass in comint mode
-  (defadvice compile
-    (before ad-compile-smart activate)
-    (ad-set-arg 1 t))
-  (ansi-color-for-comint-mode-on)
   (message "Running: %s" (concat
                           (simp-project-root)
-                          "/OpenERP.meta/launch.sh"))
-  (compile
-   (concat
-    (simp-project-root) "/OpenERP.meta/launch.sh")))
+                          "/OpenERP.meta/launch.el"))
+ (load-file (concat
+             (simp-project-root)
+             "/OpenERP.meta/launch.el")))
 (global-set-key (kbd "<f9>") 'erp_launch)
-;;(global-set-key (kbd "A-b") 'erp_launch)
+;;------- sample function --------------------------------------
+(require 'ansi-color)
+
+
+;; (defun launch_project()
+;;   (interactive)
+;;   (let (session_name)
+;;     (setq session_name "project_openerp_run")
+;;     (shell-command (concat "tmux kill-session -t " session_name))
+;;     (shell-command (concat "tmux new-session -d -s " session_name))
+;;     (shell-command (concat "tmux send-keys -t " session_name":0.0 'python /home/nbessi/Bureau/test.py' enter"))
+;;     (multi-term-dedicated-close)
+;;     (multi-term-dedicated-open)
+;;     (multi-term-dedicated-select)
+;;     (process-send-string nil (concat "tmux -u -l attach -t " session_name))
+;;     (term-send-input)
+;;     ))
+
+;; (launch_project)
+
 
 ;;-------------- Show bzr status of all branches of OpenERP ------------
 (defun erp_sources_status()
