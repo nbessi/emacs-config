@@ -64,16 +64,14 @@ the flush-line command
                :url "https://github.com/clojure-emacs/cider.git")
         (:name wgrep :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
-        (:name powerline :type git
-         :url "https://github.com/milkypostman/powerline.git")))
+        ))
 
 (setq my-packages
       (append
        '(smex ace-jump-mode yasnippet switch-window expand-region
               multiple-cursors yaml-mode yasnippet
               highlight-indentation  auto-complete wgrep jedi
-              powerline feature-mode color-theme f
-              clojure-mode dash)
+              feature-mode color-theme f clojure-mode dash)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
