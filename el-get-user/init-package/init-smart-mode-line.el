@@ -1,5 +1,0 @@
-(require 'smart-mode-line)
-(setq sml/theme 'respectful)
-(sml/apply-theme 'respectful)
-(sml/setup)
-(sml/apply-theme 'respectful)
