@@ -14,7 +14,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(diff-added ((t (:foreground "Green"))))
- '(diff-removed ((t (:foreground "Red")))))
+ '(diff-removed ((t (:foreground "Red"))))
+ '(term-color-blue ((t (:background "sky blue" :foreground "light steel blue")))))
 
 ;;----------- scratch comment --------------------
 (setq initial-scratch-message "Usefull emacs command I use less frequently:
