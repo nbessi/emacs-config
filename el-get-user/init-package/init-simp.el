@@ -43,6 +43,22 @@
                    (concat (simp-project-root) "/parts")
                    "&& for i in *; do echo ------$i------; bzr status  $i ;done")))
 
+;;-------------- Gives bzr unique revision info for each folder ------------
+(defun erp_revision_info()
+  (interactive)
+  (message "Checking source: %s" (concat (simp-project-root) "/parts"))
+  (compile (concat "cd "
+                   (concat (simp-project-root) "/parts")
+                   "&& for i in *;
+                       do echo $i = $(bzr version-info $i --custom --template='revid:{revision_id} \n \n');
+                   done"
+                   "&&"
+                   "cd "
+                   (concat (simp-project-root) "/Scenario")
+                   "&& for i in *;
+                    do echo $i = $(bzr version-info $i --custom --template='revid:{revision_id} \n \n');
+                   done")))
+
 
 ;;------------ Run commands in OpenERP.meta folder
 (defun erp_get_avail_commands()
