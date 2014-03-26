@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
  '(nxml-slash-auto-complete-flag t)
@@ -15,7 +16,8 @@
  ;; If there is more than one, they won't work right.
  '(diff-added ((t (:foreground "Green"))))
  '(diff-removed ((t (:foreground "Red"))))
- '(term-color-blue ((t (:background "sky blue" :foreground "light steel blue")))))
+ '(term-color-blue ((t (:background "sky blue" :foreground "light steel blue"))) t))
+
 
 ;;----------- scratch comment --------------------
 (setq initial-scratch-message "Usefull emacs command I use less frequently:
@@ -63,6 +65,7 @@ the flush-line command
                :url "https://github.com/re5et/simp.git")
         (:name cider :type git
                :url "https://github.com/clojure-emacs/cider.git")
+        (:name color-theme-solarized :type elpa)
         (:name wgrep :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         ))
@@ -72,7 +75,7 @@ the flush-line command
        '(smex ace-jump-mode yasnippet switch-window expand-region
               multiple-cursors yaml-mode yasnippet
               highlight-indentation  auto-complete wgrep jedi
-              feature-mode color-theme f clojure-mode dash)
+              feature-mode f clojure-mode dash)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
@@ -100,6 +103,8 @@ the flush-line command
 ;;---- set font -----
  (set-face-attribute 'default nil
                     :family "Menlo for Powerline" :height 95 :weight 'normal)
+
+
 
 ;;--------------- line/columns numbers ----
 (line-number-mode 1)
