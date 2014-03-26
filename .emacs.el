@@ -8,14 +8,15 @@
  '(large-file-warning-threshold nil)
  '(nxml-slash-auto-complete-flag t)
  '(py-imenu-create-index-p t)
- '(safe-local-variable-values (quote ((encoding . utf-8)))))
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(send-mail-function (quote mailclient-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diff-added ((t (:foreground "Green"))))
- '(diff-removed ((t (:foreground "Red"))))
+ '(diff-added ((t (:foreground "Green"))) t)
+ '(diff-removed ((t (:foreground "Red"))) t)
  '(term-color-blue ((t (:background "sky blue" :foreground "light steel blue"))) t))
 
 
