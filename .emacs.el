@@ -115,7 +115,7 @@ the flush-line command
 
 ;;------ comint mode lenght ----
 (add-hook 'compilation-filter-hook 'comint-truncate-buffer)
-(setq comint-buffer-maximum-size 2000)
+(setq comint-buffer-maximum-size 200)
 
 ;;---- uniquify ----------------------------------------
 (require 'uniquify)
