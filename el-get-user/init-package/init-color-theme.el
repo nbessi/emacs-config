@@ -72,7 +72,6 @@
 
 (eval-when-compile
   (require 'color-theme))
-
 (defun color-theme-solarized (mode)
   "Color theme by Ethan Schoonover, created 2011-03-24.
 Ported to Emacs by Greg Pfeil, http://ethanschoonover.com/solarized."

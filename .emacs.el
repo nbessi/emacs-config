@@ -31,6 +31,8 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html
 The hide show minor mode:
 http://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html
 
+The emmet mode to edit XML
+
 In short:
 The wgrep mode
 the flush-line command
@@ -177,5 +179,15 @@ the flush-line command
 (add-hook 'term-mode-hook (lambda()
                 (yas-minor-mode -1)))
 
+;;-------- xclip hack --------------
+ (defun paste-from-xclip ()
+   (interactive)
+   (shell-command "xclip -o > /tmp/xclip.share")
+   (insert-file "/tmp/xclip.share"))
+
+ (defun copy-to-xclip ()
+         (interactive)
+         (write-region (point-min) (point-max) "/tmp/xclip.share")
+         (shell-command "cat /tmp/xclip.share|xclip &"))
 ;;----server-mode---
 (server-start)
