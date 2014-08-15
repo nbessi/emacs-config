@@ -112,7 +112,7 @@ the flush-line command
 
 ;;---- set font -----
  (set-face-attribute 'default nil
-                    :family "Menlo for Powerline" :height 95 :weight 'normal)
+                     :family "Source Code Pro for Powerline" :height 95 :weight 'normal)
 
 
 
