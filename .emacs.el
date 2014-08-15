@@ -40,11 +40,15 @@ the flush-line command
 
 ")
 
+
+
+
 ;;--------- disable menu -------------------------
 (menu-bar-mode -1)
 
 ;;--------- no background on emacsclient----------
-(defun on-after-init-no-bg ()
+(defun term_no_bg ()
+  (interactive)
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
