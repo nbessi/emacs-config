@@ -17,11 +17,12 @@
  ;; If there is more than one, they won't work right.
  '(diff-added ((t (:foreground "Green"))) t)
  '(diff-removed ((t (:foreground "Red"))) t)
- '(term-color-blue ((t (:background "sky blue" :foreground "light steel blue"))) t))
+;; '(term-color-blue ((t (:background "sky blue" :foreground "light steel blue"))) t)
+)
 
 
 ;;----------- scratch comment --------------------
-(setq initial-scratch-message "Usefull emacs command I use less frequently:
+(setq initial-scratch-message "Useful Emacs command I use less frequently:
 Register: http://www.gnu.org/software/emacs/manual/html_node/emacs/Registers.html#Registers
 Do not forget to use the extention list register.
 
