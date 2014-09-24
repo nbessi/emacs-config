@@ -1,0 +1,11 @@
+# name: odoo_klass
+# key: odoo_klass
+# --
+
+
+class ${1:MyClass}(${2:models.Model}):
+      """${3:docstring}"""
+
+      _${4:name} = "${1:$(replace-regexp-in-string "_" "." (downcase yas/text))}"
+
+$0

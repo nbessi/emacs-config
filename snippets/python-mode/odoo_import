@@ -1,0 +1,4 @@
+# name: odoo_import
+# key: odoo_import
+# --
+from openerp import models, fields

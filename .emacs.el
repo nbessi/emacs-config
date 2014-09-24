@@ -59,6 +59,10 @@ the flush-line command
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 ;;---------- el-get----------------------------------
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -80,6 +84,9 @@ the flush-line command
         (:name cider :type git
                :url "https://github.com/clojure-emacs/cider.git")
         (:name color-theme-solarized :type elpa)
+        (:name anaconda-mode :type elpa)
+        (:name company :type elpa)
+        (:name company-anaconda :type elpa)
         (:name wgrep :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         ))
@@ -87,8 +94,8 @@ the flush-line command
 (setq my-packages
       (append
        '(smex ace-jump-mode yasnippet switch-window expand-region
-              multiple-cursors yaml-mode yasnippet
-              highlight-indentation  auto-complete wgrep jedi
+              multiple-cursors yaml-mode yasnippet anaconda-mode
+              highlight-indentation company-mode company-anaconda wgrep ;;jedi
               feature-mode f clojure-mode dash)
        (mapcar 'el-get-source-name el-get-sources)))
 
