@@ -35,28 +35,20 @@
 ;; (launch_project)
 
 
-;;-------------- Show bzr status of all branches of OpenERP ------------
-(defun erp_sources_status()
-  (interactive)
-  (message "Checking source: %s" (concat (simp-project-root) "/parts"))
-  (compile (concat "cd "
-                   (concat (simp-project-root) "/parts")
-                   "&& for i in *; do echo ------$i------; bzr status  $i ;done")))
-
-;;-------------- Gives bzr unique revision info for each folder ------------
+;;-------------- Gives git unique revision info for each folder ------------
 (defun erp_revision_info()
   (interactive)
   (message "Checking source: %s" (concat (simp-project-root) "/parts"))
   (compile (concat "cd "
                    (concat (simp-project-root) "/parts")
                    "&& for i in *;
-                       do echo $i = $(bzr version-info $i --custom --template='revid:{revision_id} \n \n');
+                       do echo $i = $(git rev-parse HEAD \n \n');
                    done"
                    "&&"
                    "cd "
                    (concat (simp-project-root) "/Scenario")
                    "&& for i in *;
-                    do echo $i = $(bzr version-info $i --custom --template='revid:{revision_id} \n \n');
+                    do echo $i = $(git rev-parse HEAD  \n \n');
                    done")))
 
 
