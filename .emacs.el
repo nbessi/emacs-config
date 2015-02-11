@@ -83,10 +83,11 @@ the flush-line command
                :url "https://github.com/re5et/simp.git")
         (:name cider :type git
                :url "https://github.com/clojure-emacs/cider.git")
-        (:name color-theme-solarized :type elpa)
         (:name anaconda-mode :type elpa)
         (:name company :type elpa)
         (:name company-anaconda :type elpa)
+        (:name key-chord :type elpa)
+        (:name color-theme-solarized :type elpa)
         (:name wgrep :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         ))
@@ -103,7 +104,6 @@ the flush-line command
 
 
 (setq-default indent-tabs-mode nil)
-
 ;;------- general setups ------------------------------
 (global-set-key (kbd "C-z") 'undo)
 (defalias 'yes-or-no-p 'y-or-n-p)
