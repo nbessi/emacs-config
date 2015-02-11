@@ -1,3 +1,5 @@
 ;;--------- color --------------------------------
-(require 'color-theme-solarized-autoloads)
+(require 'color-theme)
+(require 'color-theme-solarized)
+(color-theme-solarized)
 (load-theme 'solarized-dark t)
