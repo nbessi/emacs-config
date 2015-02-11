@@ -3,7 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-safe-themes (quote ("1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
  '(nxml-slash-auto-complete-flag t)
@@ -16,12 +16,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(diff-added ((t (:foreground "Green"))) t)
- '(diff-removed ((t (:foreground "Red"))) t)
-;; '(term-color-blue ((t (:background "sky blue" :foreground "light steel blue"))) t)
-)
+ '(diff-removed ((t (:foreground "Red"))) t))
 
-
-;;----------- scratch comment --------------------
+;;----------- scratch comment --------------------------------------------------
 (setq initial-scratch-message "Useful Emacs commands I use less frequently:
 Register: http://www.gnu.org/software/emacs/manual/html_node/emacs/Registers.html#Registers
 Do not forget to use the extention list register.
@@ -34,16 +31,13 @@ http://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html
 
 The emmet mode to edit XML
 
-In short:
 The wgrep mode
-the flush-line command
+
+The flush-line command
 
 ")
 
-
-
-
-;;--------- disable menu -------------------------
+;;--------- disable menu -------------------------------------------------------
 (menu-bar-mode -1)
 
 ;;--------- no background on emacsclient----------
@@ -53,7 +47,7 @@ the flush-line command
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
 ;;(add-hook 'window-setup-hook 'on-after-init-no-bg)
-;;--------- package-------------------------------
+;;--------- package management -------------------------------------------------
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -63,7 +57,7 @@ the flush-line command
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;;---------- el-get----------------------------------
+;;---------- el-get ------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil 'noerror)
@@ -102,9 +96,10 @@ the flush-line command
 
 (el-get 'sync my-packages)
 
-
+;;------- tab management -------------------------------------------------------
 (setq-default indent-tabs-mode nil)
-;;------- general setups ------------------------------
+
+;;------- general setups -------------------------------------------------------
 (global-set-key (kbd "C-z") 'undo)
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; mac os keyboard
@@ -121,28 +116,26 @@ the flush-line command
 ;; enable cua mode
 (cua-mode 1)
 
-;;---- set font -----
+;;---- set font ----------------------------------------------------------------
  (set-face-attribute 'default nil
                      :family "Source Code Pro for Powerline" :height 95 :weight 'normal)
 
-
-
-;;--------------- line/columns numbers ----
+;;--------------- line/columns numbers -----------------------------------------
 (line-number-mode 1)
 (column-number-mode 1)
 
-;;------ comint mode lenght ----
+;;------ comint mode lenght ----------------------------------------------------
 (add-hook 'compilation-filter-hook 'comint-truncate-buffer)
 (setq comint-buffer-maximum-size 200)
 
-;;---- uniquify ----------------------------------------
+;;---- uniquify ----------------------------------------------------------------
 (require 'uniquify)
 (setq
   uniquify-buffer-name-style 'post-forward
   uniquify-separator ":")
 
-;;------ autosave --------------------------------------
-;; Write backup files to own directory
+;;------ autosave --------------------------------------------------------------
+;; Write backup files to defined directory
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 
@@ -153,10 +146,10 @@ the flush-line command
 (setq vc-make-backup-files t)
 
 
-;;----- splach screen --------------------------
+;;----- disable splach screen --------------------------------------------------
 (setq inhibit-splash-screen t)
 
-;;------------- disable toolbar ----------------
+;;------------- disable toolbar ------------------------------------------------
 (condition-case nil
 (tool-bar-mode -1)
 (error nil))
@@ -164,10 +157,10 @@ the flush-line command
 (scroll-bar-mode -1)
 (error nil))
 
-;;------- gui dialog box disable -----------------
+;;------- Gui dialog box disable -----------------
 (setq use-dialog-box nil)
 
-;;---------- cursor ------------------------------
+;;---------- cursor-type -------------------------
 (setq-default cursor-type 'bar)
 
 ;;----- recent-file ------------------------------
@@ -197,7 +190,7 @@ the flush-line command
 (add-hook 'term-mode-hook (lambda()
                 (yas-minor-mode -1)))
 
-;;------copy-paste in tmux ----------------------
+;;------ copy-paste in tmux ----------------------
 
 (setq x-select-enable-clipboard t)
 
@@ -233,5 +226,5 @@ the flush-line command
 ;;   ;; http://www.mail-archive.com/help-gnu-emacs@gnu.org/msg03577.html
 ;;  ))
 
-;;----server-mode---
+;;---- server-mode at start up ---
 (server-start)
