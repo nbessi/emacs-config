@@ -38,17 +38,23 @@
 ;;-------------- Gives git unique revision info for each folder ------------
 (defun erp_revision_info()
   (interactive)
-  (message "Checking source: %s" (concat (simp-project-root) "/parts"))
+  (message "Checking source: %s" (concat (simp-project-root) " "))
   (compile (concat "cd "
-                   (concat (simp-project-root) "/parts")
+                   (concat (simp-project-root) "/parts ")
                    "&& for i in *;
-                       do echo $i = $(git rev-parse HEAD \n \n');
-                   done"
-                   "&&"
+                     do
+                       cd $i
+                       echo $i = $(git rev-parse HEAD)
+                       cd ..
+                     done "
+                   "&& "
                    "cd "
-                   (concat (simp-project-root) "/Scenario")
+                   (concat (simp-project-root) "/Scenario ")
                    "&& for i in *;
-                    do echo $i = $(git rev-parse HEAD  \n \n');
+                      do
+                       cd $i
+                       echo $i = $(git rev-parse HEAD)
+                       cd ..
                    done")))
 
 
