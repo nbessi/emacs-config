@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(frame-background-mode (quote dark))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
  '(nxml-slash-auto-complete-flag t)
@@ -81,7 +82,8 @@ The flush-line command
         (:name company :type elpa)
         (:name company-anaconda :type elpa)
         (:name key-chord :type elpa)
-        (:name color-theme-solarized :type elpa)
+        (:name solarized :type git
+               :url "https://github.com/sellout/emacs-color-theme-solarized.git")
         (:name wgrep :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         ))
@@ -117,8 +119,10 @@ The flush-line command
 (cua-mode 1)
 
 ;;---- set font ----------------------------------------------------------------
- (set-face-attribute 'default nil
-                     :family "Source Code Pro for Powerline" :height 95 :weight 'normal)
+;; (add-to-list 'default-frame-alist '(font . "Source Code Pro for Powerline-10"))
+
+;;  (set-face-attribute 'default t
+;;                      :font "Source Code Pro for Powerline-10")
 
 ;;--------------- line/columns numbers -----------------------------------------
 (line-number-mode 1)
@@ -186,10 +190,27 @@ The flush-line command
         (message "Error! The minimum value for transparency is 0!")
       (set-frame-parameter nil 'alpha numb))))
 
-;;---disable yas in term mode -------------------
+;;--- disable yas in term mode -------------------
 (add-hook 'term-mode-hook (lambda()
                 (yas-minor-mode -1)))
-
+;;--- evil setup /install with elg-get even with melpa type seems broken ---
+(require 'evil)
+(evil-mode 1)
+(loop for (mode . state) in '((inferior-emacs-lisp-mode . emacs)
+                              (nrepl-mode . insert)
+                              (pylookup-mode . emacs)
+                              (comint-mode . emacs)
+                              (shell-mode . insert)
+                              (git-commit-mode . insert)
+                              (git-rebase-mode . emacs)
+                              (term-mode . emacs)
+                              (help-mode . emacs)
+                              (helm-grep-mode . emacs)
+                              (grep-mode . emacs)
+                              (magit-branch-manager-mode . emacs)
+                              (dired-mode . emacs)
+                              (wdired-mode . emacs))
+      do (evil-set-initial-state mode state))
 ;;------ copy-paste in tmux ----------------------
 
 (setq x-select-enable-clipboard t)
