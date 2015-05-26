@@ -1,7 +1,7 @@
 (require 'simp)
 (simp-project-define
-  '(:has (OpenERP.meta)
-    :ignore (.bzr)))
+  '(:has (Odoo_makefile)
+    :ignore (.git)))
 
 ;;--- Run an OpenERP instance using shell script -------------
 (defun erp_launch()
@@ -9,10 +9,11 @@
   ;; we pass in comint mode
   (message "Running: %s" (concat
                           (simp-project-root)
-                          "/OpenERP.meta/launch.el"))
- (load-file (concat
-             (simp-project-root)
-             "/OpenERP.meta/launch.el")))
+                          "/Odoo_makefile"))
+  (shell-command (concat
+                  "/usr/bin/make -f "
+                  (simp-project-root)
+                  "/Odoo_makefile")))
 (global-set-key (kbd "<f9>") 'erp_launch)
 ;;------- sample function --------------------------------------
 (require 'ansi-color)
