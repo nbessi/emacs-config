@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(evil-search-module (quote evil-search))
  '(frame-background-mode (quote dark))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
@@ -211,6 +212,13 @@ The flush-line command
                               (dired-mode . emacs)
                               (wdired-mode . emacs))
       do (evil-set-initial-state mode state))
+;;------ underscore is not a word separator ------
+(defadvice evil-inner-word (around underscore-as-word activate)
+  (let ((table (copy-syntax-table (syntax-table))))
+    (modify-syntax-entry ?_ "w" table)
+    (with-syntax-table table
+      ad-do-it)))
+
 ;;------ copy-paste in tmux ----------------------
 
 (setq x-select-enable-clipboard t)
