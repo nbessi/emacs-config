@@ -218,6 +218,8 @@ The flush-line command
     (modify-syntax-entry ?_ "w" table)
     (with-syntax-table table
       ad-do-it)))
+;;------ switch to normal mode on save -----------
+(add-hook 'before-save-hook 'evil-normal-state)
 
 ;;------ copy-paste in tmux ----------------------
 
