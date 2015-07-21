@@ -3,14 +3,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-safe-themes (quote ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
  '(evil-search-module (quote evil-search))
  '(frame-background-mode (quote dark))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
  '(nxml-slash-auto-complete-flag t)
  '(py-imenu-create-index-p t)
- '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(safe-local-variable-values (quote ((eval when (fboundp (quote rainbow-mode)) (rainbow-mode 1)) (encoding . utf-8))))
  '(send-mail-function (quote mailclient-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -20,242 +20,84 @@
  '(diff-added ((t (:foreground "Green"))) t)
  '(diff-removed ((t (:foreground "Red"))) t))
 
-;;----------- scratch comment --------------------------------------------------
-(setq initial-scratch-message "Useful Emacs commands I use less frequently:
-Register: http://www.gnu.org/software/emacs/manual/html_node/emacs/Registers.html#Registers
-Do not forget to use the extention list register.
-
-The mark ring that works like the kill ring:
-https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html
-
-The hide show minor mode:
-http://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html
-
-The emmet mode to edit XML
-
-The wgrep mode
-
-The flush-line command
-
-")
-
-;;--------- disable menu -------------------------------------------------------
-(menu-bar-mode -1)
-
-;;--------- no background on emacsclient----------
-(defun term_no_bg ()
-  (interactive)
-  (unless (display-graphic-p (selected-frame))
-    (set-face-background 'default "unspecified-bg" (selected-frame))))
-
-;;(add-hook 'window-setup-hook 'on-after-init-no-bg)
 ;;--------- package management -------------------------------------------------
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
 
-(require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;;---------- el-get ------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(package-initialize)
+;;---------Managing my package --------------------------------------------------
+(require 'cl)
+(defvar required-packages
+  '(
+    dash
+    f
+    avy
+    anaconda-mode
+    clojure-mode
+    company
+    company-anaconda
+    dash
+    emmet-mode
+    evil
+    evil-leader
+    expand-region
+    feature-mode
+    flycheck
+    highlight-indentation
+;;    magit
+    multi-term
+    multiple-cursors
+    simp
+    smex
+    switch-window
+    yaml-mode
+    solarized-theme
+    yasnippet
+    )
+  "a list of packages to ensure are installed at launch.")
 
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (let (el-get-install-skip-emacswiki-recipes)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))))
+; method to check if all packages are installed
+(defun packages-installed-p ()
+  (loop for p in required-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
 
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(setq el-get-user-package-directory "~/.emacs.d/el-get-user/init-package")
+; if not all packages are installed, check one by one and install the missing ones.
+(unless (packages-installed-p)
+                                        ; check for new packages (package versions)
+  (message "%s" "Emacs is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+; install the missing packages
+  (dolist (p required-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+;;------- loading packages setup -----------------------------------------------
 
-(setq el-get-sources
-      '((:name simp :type git
-               :url "https://github.com/re5et/simp.git")
-        (:name cider :type git
-               :url "https://github.com/clojure-emacs/cider.git")
-        (:name anaconda-mode :type elpa)
-        (:name company :type elpa)
-        (:name company-anaconda :type elpa)
-        (:name key-chord :type elpa)
-        (:name solarized :type git
-               :url "https://github.com/sellout/emacs-color-theme-solarized.git")
-        (:name wgrep :type git
-               :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
-        ))
+(load "~/.emacs.d/package-configurations/init-anaconda-mode.el")
+(load "~/.emacs.d/package-configurations/init-color-theme.el")
+(load "~/.emacs.d/package-configurations/init-company-anaconda.el")
+(load "~/.emacs.d/package-configurations/init-company.el")
+(load "~/.emacs.d/package-configurations/init-evil.el")
+(load "~/.emacs.d/package-configurations/init-expand-region.el")
+(load "~/.emacs.d/package-configurations/init-feature-mode.el")
+(load "~/.emacs.d/package-configurations/init-flycheck.el")
+(load "~/.emacs.d/package-configurations/init-ido.el")
+(load "~/.emacs.d/package-configurations/init-multiple-cursors.el")
+(load "~/.emacs.d/package-configurations/init-python.el")
+(load "~/.emacs.d/package-configurations/init-ruby.el")
+(load "~/.emacs.d/package-configurations/init-simp.el")
+(load "~/.emacs.d/package-configurations/init-smex.el")
+(load "~/.emacs.d/package-configurations/init-switch-window.el")
+(load "~/.emacs.d/package-configurations/init-yaml-mode.el")
+(load "~/.emacs.d/package-configurations/init-yasnippet.el")
 
-(setq my-packages
-      (append
-       '(smex ace-jump-mode yasnippet switch-window expand-region
-              multiple-cursors yaml-mode yasnippet anaconda-mode
-              highlight-indentation company-mode company-anaconda wgrep ;;jedi
-              feature-mode f clojure-mode dash)
-       (mapcar 'el-get-source-name el-get-sources)))
-
-(el-get 'sync my-packages)
-
-;;------- tab management -------------------------------------------------------
-(setq-default indent-tabs-mode nil)
-
-;;------- general setups -------------------------------------------------------
-(global-set-key (kbd "C-z") 'undo)
-(defalias 'yes-or-no-p 'y-or-n-p)
-;; mac os keyboard
-(setq mac-option-modifier nil)
-(setq mac-option-key-is-meta nil)
-;; paren mode active
-(show-paren-mode 1)
-;; custom shortcut
-(global-set-key (kbd "§") 'hippie-expand)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "<f6>") 'rgrep)
-(global-set-key (kbd "<f7>") 'ido-switch-buffer)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-;; enable cua mode
-(cua-mode 1)
-
-;;---- set font ----------------------------------------------------------------
-;; (add-to-list 'default-frame-alist '(font . "Source Code Pro for Powerline-10"))
-
-;;  (set-face-attribute 'default t
-;;                      :font "Source Code Pro for Powerline-10")
-
-;;--------------- line/columns numbers -----------------------------------------
-(line-number-mode 1)
-(column-number-mode 1)
-
-;;------ comint mode lenght ----------------------------------------------------
-(add-hook 'compilation-filter-hook 'comint-truncate-buffer)
-(setq comint-buffer-maximum-size 200)
-
-;;---- uniquify ----------------------------------------------------------------
-(require 'uniquify)
-(setq
-  uniquify-buffer-name-style 'post-forward
-  uniquify-separator ":")
-
-;;------ autosave --------------------------------------------------------------
-;; Write backup files to defined directory
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
-;; Make backups of files, even when they're in version control
-(setq vc-make-backup-files t)
-
-
-;;----- disable splach screen --------------------------------------------------
-(setq inhibit-splash-screen t)
-
-;;------------- disable toolbar ------------------------------------------------
-(condition-case nil
-(tool-bar-mode -1)
-(error nil))
-(condition-case nil
-(scroll-bar-mode -1)
-(error nil))
-
-;;------- Gui dialog box disable -----------------
-(setq use-dialog-box nil)
-
-;;---------- cursor-type -------------------------
-(setq-default cursor-type 'bar)
-
-;;----- recent-file ------------------------------
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-;;----- builtin config ---------------------------
-(load "~/.emacs.d/init-builtin/ido")
-(load "~/.emacs.d/init-builtin/python")
-(load "~/.emacs.d/init-builtin/ruby")
-;;----- custom helpers ---------------------------
-(load "~/.emacs.d/helper/helper")
-
-;;------ set transparancy ------------------------
-(defun set_frame_opacity(numb)
-  "Set level of transparenbcy for the current frame"
-  (interactive "nEnter transparency level in range 0-100: ")
-  (if (> numb 100)
-      (message "Error! The maximum value for transparency is 100!")
-    (if (< numb 0)
-        (message "Error! The minimum value for transparency is 0!")
-      (set-frame-parameter nil 'alpha numb))))
-
-;;--- disable yas in term mode -------------------
-(add-hook 'term-mode-hook (lambda()
-                (yas-minor-mode -1)))
-;;--- evil setup /install with elg-get even with melpa type seems broken ---
-(require 'evil)
-(evil-mode 1)
-(loop for (mode . state) in '((inferior-emacs-lisp-mode . emacs)
-                              (nrepl-mode . insert)
-                              (pylookup-mode . emacs)
-                              (comint-mode . emacs)
-                              (shell-mode . insert)
-                              (git-commit-mode . insert)
-                              (git-rebase-mode . emacs)
-                              (term-mode . emacs)
-                              (help-mode . emacs)
-                              (helm-grep-mode . emacs)
-                              (grep-mode . emacs)
-                              (magit-branch-manager-mode . emacs)
-                              (dired-mode . emacs)
-                              (wdired-mode . emacs))
-      do (evil-set-initial-state mode state))
-;;------ underscore is not a word separator ------
-(defadvice evil-inner-word (around underscore-as-word activate)
-  (let ((table (copy-syntax-table (syntax-table))))
-    (modify-syntax-entry ?_ "w" table)
-    (with-syntax-table table
-      ad-do-it)))
-;;------ switch to normal mode on save -----------
-(add-hook 'before-save-hook 'evil-normal-state)
-
-;;------ copy-paste in tmux ----------------------
-
-(setq x-select-enable-clipboard t)
-
-;; If emacs is run in a terminal, the clipboard- functions have no
-;; effect. Instead, we use of xsel, see
-;; http://www.vergenet.net/~conrad/software/xsel/ -- "a command-line
-;; program for getting and setting the contents of the X selection"
-;; (unless window-system
-;;  (when (getenv "DISPLAY")
-;;   ;; Callback for when user cuts
-;;   (defun xsel-cut-function (text &optional push)
-;;     ;; Insert text to temp-buffer, and "send" content to xsel stdin
-;;     (with-temp-buffer
-;;       (insert text)
-;;       ;; I prefer using the "clipboard" selection (the one the
-;;       ;; typically is used by c-c/c-v) before the primary selection
-;;       ;; (that uses mouse-select/middle-button-click)
-;;       (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
-;;   ;; Call back for when user pastes
-;;   (defun xsel-paste-function()
-;;     ;; Find out what is current selection by xsel. If it is different
-;;     ;; from the top of the kill-ring (car kill-ring), then return
-;;     ;; it. Else, nil is returned, so whatever is in the top of the
-;;     ;; kill-ring will be used.
-;;     (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
-;;       (unless (string= (car kill-ring) xsel-output)
-;;         xsel-output )))
-;;   ;; Attach callbacks to hooks
-;;   (setq interprogram-cut-function 'xsel-cut-function)
-;;   (setq interprogram-paste-function 'xsel-paste-function)
-;;   ;; Idea from
-;;   ;; http://shreevatsa.wordpress.com/2006/10/22/emacs-copypaste-and-x/
-;;   ;; http://www.mail-archive.com/help-gnu-emacs@gnu.org/msg03577.html
-;;  ))
+;;----- load builtin config ----------------------------------
+(load "~/.emacs.d/init-builtin.el")
 
 ;;---- server-mode at start up ---
 (server-start)
