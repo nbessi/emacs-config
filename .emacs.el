@@ -31,7 +31,7 @@ https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html
 The hide show minor mode:
 http://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html
 
-The emmet mode to edit XML
+The emet mode to edit XML
 
 The wgrep mode
 
@@ -53,51 +53,54 @@ The flush-line command
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
 
-(require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;;---------- el-get ------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(package-initialize)
+;;---------Managing my package --------------------------------------------------
+(require 'cl)
+(defvar required-packages
+  '(
+    ace-jump-mode
+    anaconda-mode
+    clojure-mode
+    company
+    company-anaconda
+    dash
+    emmet-mode
+    evil
+    evil-leader
+    expand-region
+    feature-mode
+    highlight-indentation
+    magit
+    multi-term
+    multiple-cursors
+    simp
+    smex
+    switch-window
+    yaml-mode
+    yasnippet
+    )
+  "a list of packages to ensure are installed at launch.")
 
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (let (el-get-install-skip-emacswiki-recipes)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))))
+; method to check if all packages are installed
+(defun packages-installed-p ()
+  (loop for p in required-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
 
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(setq el-get-user-package-directory "~/.emacs.d/el-get-user/init-package")
-
-(setq el-get-sources
-      '((:name simp :type git
-               :url "https://github.com/re5et/simp.git")
-        (:name cider :type git
-               :url "https://github.com/clojure-emacs/cider.git")
-        (:name anaconda-mode :type elpa)
-        (:name company :type elpa)
-        (:name company-anaconda :type elpa)
-        (:name key-chord :type elpa)
-        (:name solarized :type git
-               :url "https://github.com/sellout/emacs-color-theme-solarized.git")
-        (:name wgrep :type git
-               :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
-        ))
-
-(setq my-packages
-      (append
-       '(smex ace-jump-mode yasnippet switch-window expand-region
-              multiple-cursors yaml-mode yasnippet anaconda-mode
-              highlight-indentation company-mode company-anaconda wgrep ;;jedi
-              feature-mode f clojure-mode dash)
-       (mapcar 'el-get-source-name el-get-sources)))
-
-(el-get 'sync my-packages)
+; if not all packages are installed, check one by one and install the missing ones.
+(unless (packages-installed-p)
+                                        ; check for new packages (package versions)
+  (message "%s" "Emacs is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+; install the missing packages
+  (dolist (p required-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
 
 ;;------- tab management -------------------------------------------------------
 (setq-default indent-tabs-mode nil)
@@ -174,10 +177,6 @@ The flush-line command
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-;;----- builtin config ---------------------------
-(load "~/.emacs.d/init-builtin/ido")
-(load "~/.emacs.d/init-builtin/python")
-(load "~/.emacs.d/init-builtin/ruby")
 ;;----- custom helpers ---------------------------
 (load "~/.emacs.d/helper/helper")
 
@@ -224,38 +223,7 @@ The flush-line command
 ;;------ copy-paste in tmux ----------------------
 
 (setq x-select-enable-clipboard t)
-
-;; If emacs is run in a terminal, the clipboard- functions have no
-;; effect. Instead, we use of xsel, see
-;; http://www.vergenet.net/~conrad/software/xsel/ -- "a command-line
-;; program for getting and setting the contents of the X selection"
-;; (unless window-system
-;;  (when (getenv "DISPLAY")
-;;   ;; Callback for when user cuts
-;;   (defun xsel-cut-function (text &optional push)
-;;     ;; Insert text to temp-buffer, and "send" content to xsel stdin
-;;     (with-temp-buffer
-;;       (insert text)
-;;       ;; I prefer using the "clipboard" selection (the one the
-;;       ;; typically is used by c-c/c-v) before the primary selection
-;;       ;; (that uses mouse-select/middle-button-click)
-;;       (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
-;;   ;; Call back for when user pastes
-;;   (defun xsel-paste-function()
-;;     ;; Find out what is current selection by xsel. If it is different
-;;     ;; from the top of the kill-ring (car kill-ring), then return
-;;     ;; it. Else, nil is returned, so whatever is in the top of the
-;;     ;; kill-ring will be used.
-;;     (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
-;;       (unless (string= (car kill-ring) xsel-output)
-;;         xsel-output )))
-;;   ;; Attach callbacks to hooks
-;;   (setq interprogram-cut-function 'xsel-cut-function)
-;;   (setq interprogram-paste-function 'xsel-paste-function)
-;;   ;; Idea from
-;;   ;; http://shreevatsa.wordpress.com/2006/10/22/emacs-copypaste-and-x/
-;;   ;; http://www.mail-archive.com/help-gnu-emacs@gnu.org/msg03577.html
-;;  ))
-
+;;---- load package config -------
+(add-to-list 'load-path "~/.emacs.d/package-configurations/")
 ;;---- server-mode at start up ---
 (server-start)
