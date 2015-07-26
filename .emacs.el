@@ -89,6 +89,7 @@
 (load "~/.emacs.d/package-configurations/init-feature-mode.el")
 (load "~/.emacs.d/package-configurations/init-flycheck.el")
 (load "~/.emacs.d/package-configurations/init-ido.el")
+(load "~/.emacs.d/package-configurations/init-magit.el")
 (load "~/.emacs.d/package-configurations/init-multiple-cursors.el")
 (load "~/.emacs.d/package-configurations/init-python.el")
 (load "~/.emacs.d/package-configurations/init-ruby.el")
