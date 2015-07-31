@@ -59,6 +59,8 @@
     yaml-mode
     solarized-theme
     yasnippet
+    org
+    ox-pandoc
     )
   "a list of packages to ensure are installed at launch.")
 
