@@ -50,7 +50,7 @@
     feature-mode
     flycheck
     highlight-indentation
-;;    magit
+    magit
     multi-term
     multiple-cursors
     simp
