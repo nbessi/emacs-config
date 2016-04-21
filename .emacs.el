@@ -101,6 +101,7 @@
 (load "~/.emacs.d/package-configurations/init-switch-window.el")
 (load "~/.emacs.d/package-configurations/init-yaml-mode.el")
 (load "~/.emacs.d/package-configurations/init-yasnippet.el")
+(load "~/.emacs.d/htmlize.el")
 
 ;;----- load builtin config ----------------------------------
 (load "~/.emacs.d/init-builtin.el")

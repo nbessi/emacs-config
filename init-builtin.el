@@ -125,3 +125,85 @@ The flush-line command
 ;;------ copy-paste in tmux ----------------------
 
 (setq x-select-enable-clipboard t)
+
+;;------ org Babel -------------------------------
+
+(org-babel-do-load-languages
+ (quote org-babel-load-languages)
+ (quote ((emacs-lisp . t)
+         (java . t)
+         (dot . t)
+         (ditaa . t)
+         (R . t)
+         (python . t)
+         (ruby . t)
+         (gnuplot . t)
+         (clojure . t)
+         (sh . t)
+         (ledger . t)
+         (org . t)
+         (plantuml . t)
+         (latex . t))))
+;;----org LATEX------------------------------------
+
+(require 'ox-latex)
+(unless (boundp 'org-latex-classes)
+  (setq org-latex-classes nil)
+(add-to-list 'org-latex-classes
+          '("doc_vaud"
+          "\\documentclass[french,fleqn,10pt,hidelinks]{article}
+           \\usepackage[a4paper,left=25mm,right=25mm,top=20mm,bottom=30mm]{geometry}
+           \\usepackage[utf8]{inputenc}
+           \\usepackage{titling}
+           \\usepackage{babel}
+           \\usepackage[dvipsnames]{xcolor}
+           \\usepackage{graphicx}
+           \\usepackage{wrapfig}
+           \\usepackage{color}
+           \\usepackage{titling} %make title hook
+           \\usepackage{titlesec}
+           \\usepackage{tikz}\\usetikzlibrary{shapes.misc}
+           \\usepackage{fancyhdr}
+           % Remove paragrph indent
+           \\setlength{\\parindent}{0cm}
+           %
+           \\pagestyle{fancy}
+           % redefine title
+           % Headers
+           \\lhead{\\includegraphics[width=20px]{./logo.png}}%
+           \\chead{\\DSI Pôle \TEP - NBI - {\\today}}
+
+           % Footers
+           \\lfoot{{\\scriptsize Direction des systèmes d'information – DSI \\newline Avenue de Longemalle 1, CH-1020 Lausanne \\newline www.vd.ch – T 41 21 316 26 00 – F 41 21 316 27 26}}%
+           \\rhead{\\thepage}%
+           \\cfoot{}%
+           \\rfoot{}%
+           \\renewcommand{\\headrulewidth}{0.4pt}
+           \\renewcommand{\\footrulewidth}{0.4pt}
+          % Section style
+          \\newcommand\\titlebar{%
+          \\tikz[baseline,trim left=3.1cm,trim right=3cm] {
+          \\fill [ForestGreen!60!White] (2.5cm,-1ex) rectangle (\\textwidth+3.1cm,2.5ex);
+          \\node [fill=ForestGreen,
+            anchor= base east,
+            rounded rectangle,
+            minimum height=3.5ex] at (3cm,0) {
+          \\textbf{\\thesection.0}
+                 };
+             }%
+          }
+         \\titleformat{\\section}{\\large}{\\titlebar}{0.1cm}{}
+         %\\renewcommand*{\\thesection}{\\arabic{section}}
+         % calling maketitle hook
+         \\postdate{\\par \\par \\par \\newline \\includegraphics{./logo.png}
+         \\vspace*{\\fill}
+                    \\par \\par Classification : Interne DSI \\par Destinataires : Collaborateurs DSI
+                    \\pagebreak}
+         "
+
+          ("\\section{%s}" . "\\section*{%s}")
+          ("\\subsection{%s}" . "\\subsection*{%s}")
+          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+          ("\\paragraph{%s}" . "\\paragraph*{%s}")
+          ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+      )
