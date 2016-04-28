@@ -199,11 +199,13 @@ The flush-line command
          \\vspace*{\\fill}
                     \\par \\par Classification : Interne DSI \\par Destinataires : Collaborateurs DSI
                     \\pagebreak}
+         % set \texttt background for org ~xxx~ style
+         \\let\\OldTexttt\\texttt
+         \\renewcommand{\\texttt}[1]{\\OldTexttt{\\hl{#1}}}
          "
 
           ("\\section{%s}" . "\\section*{%s}")
           ("\\subsection{%s}" . "\\subsection*{%s}")
-          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+          ("\\subsubsection{%s}" . "\\sbsubsection*{%s}")
           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-          ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-      )
+          ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
