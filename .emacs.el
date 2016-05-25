@@ -61,6 +61,7 @@
     yasnippet
     org
     ox-pandoc
+    calfw
     )
   "a list of packages to ensure are installed at launch.")
 
@@ -90,7 +91,7 @@
 (load "~/.emacs.d/package-configurations/init-erc.el")
 (load "~/.emacs.d/package-configurations/init-expand-region.el")
 (load "~/.emacs.d/package-configurations/init-feature-mode.el")
-(load "~/.emacs.d/package-configurations/init-flycheck.el")
+;;(load "~/.emacs.d/package-configurations/init-flycheck.el")
 (load "~/.emacs.d/package-configurations/init-ido.el")
 (load "~/.emacs.d/package-configurations/init-magit.el")
 (load "~/.emacs.d/package-configurations/init-multiple-cursors.el")
@@ -101,6 +102,7 @@
 (load "~/.emacs.d/package-configurations/init-switch-window.el")
 (load "~/.emacs.d/package-configurations/init-yaml-mode.el")
 (load "~/.emacs.d/package-configurations/init-yasnippet.el")
+(load "~/.emacs.d/package-configurations/init-calfw.el")
 (load "~/.emacs.d/htmlize.el")
 
 ;;----- load builtin config ----------------------------------
