@@ -49,13 +49,13 @@ The flush-line command
 (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; enable cua mode
 (cua-mode 1)
+;;---------------Set font-------------------------------
+(if (eq system-type 'gnu/linux)
+    (progn
+      (add-to-list 'default-frame-alist '(font . "Hack-11"))
 
-;;---- set font ----------------------------------------------------------------
-;; (add-to-list 'default-frame-alist '(font . "Hack-11"))
-
-;;  (set-face-attribute 'default t
-;;                      :font "Hack-11")
-
+      (set-face-attribute 'default t :font "Hack-11"))
+)
 ;;--------------- line/columns numbers -----------------------------------------
 (line-number-mode 1)
 (column-number-mode 1)
