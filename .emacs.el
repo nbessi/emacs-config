@@ -104,6 +104,7 @@
 (load "~/.emacs.d/package-configurations/init-yasnippet.el")
 (load "~/.emacs.d/package-configurations/init-calfw.el")
 (load "~/.emacs.d/htmlize.el")
+;;(load "~/.emacs.d/package-configurations/init-mu4e.el")
 
 ;;----- load builtin config ----------------------------------
 (load "~/.emacs.d/init-builtin.el")
