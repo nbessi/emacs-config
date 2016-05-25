@@ -51,10 +51,10 @@ The flush-line command
 (cua-mode 1)
 
 ;;---- set font ----------------------------------------------------------------
-(add-to-list 'default-frame-alist '(font . "Source Code Pro for Powerline-10"))
+;; (add-to-list 'default-frame-alist '(font . "Hack-11"))
 
- (set-face-attribute 'default t
-                     :font "Source Code Pro for Powerline-10")
+;;  (set-face-attribute 'default t
+;;                      :font "Hack-11")
 
 ;;--------------- line/columns numbers -----------------------------------------
 (line-number-mode 1)
@@ -147,8 +147,6 @@ The flush-line command
 ;;----org LATEX------------------------------------
 
 (require 'ox-latex)
-(unless (boundp 'org-latex-classes)
-  (setq org-latex-classes nil)
 (add-to-list 'org-latex-classes
           '("doc_vaud"
           "\\documentclass[french,fleqn,10pt,hidelinks]{article}
