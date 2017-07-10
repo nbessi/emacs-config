@@ -1,10 +1,11 @@
 ;;------custom color them --------
-
-(load-theme 'solarized t)
-
-
 (require 'powerline)
-
-(powerline-default-theme)
-(require 'airline-themes)
-;; (load-theme 'airline-molokai)
+(require 'moe-theme)
+(moe-dark)
+(moe-theme-set-color 'w/b)
+(powerline-moe-theme)
+(show-paren-mode t)
+(setq show-paren-style 'expression)
+(custom-theme-set-faces
+ 'moe-dark
+  '(font-lock-string-face ((t (:foreground  "#268BD2")))))
