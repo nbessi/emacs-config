@@ -13,9 +13,6 @@
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
  '(nxml-slash-auto-complete-flag t)
- '(package-selected-packages
-   (quote
-    (powerline-evil yasnippet yaml-mode switch-window smex simp ox-pandoc multiple-cursors multi-term magit highlight-indentation flycheck feature-mode expand-region evil-leader emmet-mode company-anaconda color-theme-solarized clojure-mode avy airline-themes)))
  '(py-imenu-create-index-p t)
  '(safe-local-variable-values
    (quote
@@ -69,9 +66,8 @@
     switch-window
     yaml-mode
     yasnippet
-    color-theme-solarized
     powerline
-    airline-themes
+    moe-theme
     org
     ox-pandoc
     ;;calfw
